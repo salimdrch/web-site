@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>takeYourSneak</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/jojo.ico}"+ />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
+    <div class="container px-5">
+        <a class="navbar-brand fw-bold" th:href="@{/#page-top}">takeYourSneak</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                <li class="nav-item"><a class="nav-link me-lg-3" th:href="@{/productList/Men}">Men</a></li>
+                <li class="nav-item"><a class="nav-link me-lg-3" th:href="@{/productList/Women}">Women</a></li>
+            </ul>
+            <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-person"></i>
+                    <span class="small"><a th:href="@{/productList/add-form}" style="color: white; text-decoration: none; " >Add product</a></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</nav>
+<!-- Mashead header-->
+<header class="masthead">
+    <aside class="text-center bg-gradient-primary-to-secondary">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-xl-8">
+                    <div class="h2 fs-1 text-white mb-4"><h1 th:text="${pageTitle}"/></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</header>
+
+<section>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body border-0 p-4">
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN"action="#" th:action="@{/productList/save}" method="post" th:object="${product}" > <!--  -->
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" type="text" th:field="*{productName}" placeholder="Enter Product name..." data-sb-validations="required" data-sb-can-submit="no" > <!--   -->
+                        <label for="name">Product name</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    </div>
+                    <!-- Category input -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="category" type="text" th:field="*{productCategory}"  placeholder="Enter Product category..." data-sb-validations="required" data-sb-can-submit="no">
+                        <label for="name">Product category</label>
+                        <div class="invalid-feedback" data-sb-feedback="category:required">A category is required.</div>
+                    </div>
+
+                    <!-- Description input -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="description" th:field="*{productDescription}" type="text" placeholder="Enter Product description..." data-sb-validations="required" data-sb-can-submit="no"  >
+                        <label for="name">Product description</label>
+                        <div class="invalid-feedback" data-sb-feedback="description:required">A description is required.</div>
+                    </div>
+                    <!-- Price input -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="price" type="number" th:field="*{productPrice}" placeholder="Enter Product price..." data-sb-validations="required" data-sb-can-submit="no"  >
+                        <label for="name">Product price</label>
+                        <div class="invalid-feedback" data-sb-feedback="price:required">A price is required.</div>
+                    </div>
+                    <!-- Image input -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="image" th:field="*{productImage}" maxlength="500" type="url" placeholder="Enter Product image..." data-sb-validations="required" data-sb-can-submit="no" >
+                        <label for="name">Product image</label>
+                        <div class="invalid-feedback" data-sb-feedback="image:required">A image is required.</div>
+                    </div>
+                    <!-- stock input -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="stock" type="number" th:field="*{unitStock}" placeholder="Enter Product stock..." data-sb-validations="required" data-sb-can-submit="no" >
+                        <label for="name">Product stock</label>
+                        <div class="invalid-feedback" data-sb-feedback="stock:required">A stock is required.</div>
+                    </div>
+
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="d-grid"><button class="btn btn-primary rounded-pill btn-lg "  type="submit">Submit</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="bg-black text-center py-5">
+    <div class="container px-5">
+        <div class="text-white-50 small">
+            <div class="mb-2">&copy; Your Website 2022. All Rights Reserved.</div>
+            <a href="#!">Privacy</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#!">Terms</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#!">FAQ</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../static/js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
